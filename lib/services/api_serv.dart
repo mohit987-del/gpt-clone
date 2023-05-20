@@ -1,16 +1,16 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 
-import '../constants/api.dart';
 
 class ApiService {
   static Future<List<String>> getModels() async {
     try {
-      final modalLink = Uri.parse("$baseurl/models");
+      final modalLink = Uri.parse("${dotenv.env["baseurl"]}/models");
       var res = await http.get(
         modalLink,
-        headers: {"Authorization": "Bearer $apikey"},
+        headers: {"Authorization": "Bearer ${dotenv.env["apikey"]}"},
       );
       Map jsonres = json.decode(res.body);
       if (jsonres["error"] != null) {
@@ -30,11 +30,11 @@ class ApiService {
   static Future<String> sendMessage(
       {required String message, required String modelid}) async {
     try {
-      final modalLink = Uri.parse("$baseurl/completions");
+      final modalLink = Uri.parse("${dotenv.env["baseurl"]}/completions");
       var res = await http.post(
         modalLink,
         headers: {
-          "Authorization": "Bearer $apikey",
+          "Authorization": "Bearer ${dotenv.env["apikey"]}",
           "Content-Type": "application/json",
         },
         body: json.encode(
@@ -61,11 +61,11 @@ class ApiService {
   static Future<String> gptmsg(
       {required String message, required String modelid}) async {
     try {
-      final modalLink = Uri.parse("$baseurl/chat/completions");
+      final modalLink = Uri.parse("${dotenv.env["baseurl"]}/chat/completions");
       var res = await http.post(
         modalLink,
         headers: {
-          "Authorization": "Bearer $apikey",
+          "Authorization": "Bearer ${dotenv.env["apikey"]}",
           "Content-Type": "application/json",
         },
         body: json.encode(

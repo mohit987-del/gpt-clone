@@ -1,13 +1,16 @@
 import 'package:cxw7/providers/models.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
 import 'constants/colors.dart';
 import 'screens/screens.dart';
-void main() {
+void main() async {
+  await dotenv.load();
   runApp(
     const MyApp(),
   );
 }
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
@@ -19,7 +22,7 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
-        title: 'Flutter Demo',
+        title: 'cxw7',
         theme: ThemeData(
             scaffoldBackgroundColor: scaffoldBackgroundColor,
             appBarTheme: const AppBarTheme(
